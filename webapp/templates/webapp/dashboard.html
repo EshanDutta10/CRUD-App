@@ -1,0 +1,67 @@
+{% extends 'webapp/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  {% block content %}
+
+  <h5>Welcome, {{user}}!</h5>
+
+  <hr />
+
+  <a class="btn btn-outline-primary btn-sm" href="{% url 'create-record' %}">
+    Create a new record &nbsp;
+    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+  </a>
+
+  <hr />
+
+  <table class="table table-hover table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Full name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Department</th>
+        <th scope="col">Location</th>
+
+        <th scope="col">Date joined</th>
+
+        <th scope="col">View</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% if records %} {% for record in records %}
+
+      <tr>
+        <td>{{record.id}}</td>
+
+        <td>{{record.first_name}} {{record.last_name}}</td>
+
+        <td>{{record.email}}</td>
+
+        <td>{{record.phone}}</td>
+        <td>{{record.department}}</td>
+        <td>{{record.location}}</td>
+
+        <td>{{record.creation_date}}</td>
+
+        <td>
+          <a class="btn btn-success btn-sm" href="{% url 'record' record.id %}">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+
+      {% endfor %} {% endif %}
+    </tbody>
+  </table>
+
+  {% endblock %}
+</html>
