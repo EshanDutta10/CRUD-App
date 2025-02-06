@@ -3,6 +3,8 @@ from .forms import CreateUserForm, LoginForm
 from django.contrib.auth.models import auth #logging out
 from django.contrib.auth import authenticate #authenticate users
 # from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from .models import Record
 # Create your views here.
 
 # Homepage
@@ -41,10 +43,19 @@ def my_login(request):
         if user is not None:
             auth.login(request,user)
 
-            #return redirect('')
+            return redirect('dashboard')
     
     context = {'form':form}
     return render (request, 'webapp/my-login.html',context=context)
+
+
+#dashboard
+@login_required(login_url='my-login')
+def dashboard(request):
+    my_records= Record.objects.all()
+
+    context = {'records':my_records}
+    return render (request, 'webapp/dashboard.html',context=context)
 
 # logout
 def user_logout(request):
