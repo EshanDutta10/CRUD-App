@@ -1,3 +1,4 @@
+{% extends 'webapp/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  {% block content %}
   <body>
-    <h1>Hello World!</h1>
+    <!-- <h1>Hello World!</h1> -->
+    <br />
+    <div class="text-center">
+      <h3>CRUD Application</h3>
+      <br />
+      <h5>Executing CRUD Operations using Django</h5>
+      <hr />
+      <br />
+      <br />
+      <a class="btn btn-primary" type="button" href="{% url 'register' %}">
+        Create your account</a
+      >
+    </div>
   </body>
+  {% endblock%}
 </html>
